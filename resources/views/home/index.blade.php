@@ -15,6 +15,9 @@
     @endif
     <br>
     <div class="ibox">
+      <div class="ibox-title">
+        <h5>Most recent jobs</h5>
+      </div>
       <div class="ibox-content">
         <div class="row m-b-sm m-t-sm">
           <div class="col-md-12">

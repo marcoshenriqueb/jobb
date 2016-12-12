@@ -14,7 +14,7 @@ class MainController extends Controller
                     ->orWhere('summary', 'LIKE', '%'. $needle . '%')
                     ->orWhere('description', 'LIKE', '%'. $needle . '%')->get();
       }else {
-        $jobs = Job::all();
+        $jobs = Job::orderBy('created_at', 'desc')->get();
       }
       return view('home.index', ['jobs'=>$jobs]);
     }
