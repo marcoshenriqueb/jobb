@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('/', 'MainController@get')->name('main');
+Route::get('/', 'MainController@index')->name('main');
 Route::get('/job/create/', 'JobController@create')->name('job.create');
 Route::post('/job/', 'JobController@store')->name('job.store');

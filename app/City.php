@@ -14,4 +14,9 @@ class City extends Model
     protected $fillable = [
         'name', 'ascii_name',
     ];
+
+    public function jobs()
+    {
+        return $this->hasMany('App\Job');
+    }
 }

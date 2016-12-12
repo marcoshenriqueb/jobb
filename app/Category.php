@@ -14,4 +14,9 @@ class Category extends Model
     protected $fillable = [
         'name', 'var_name', 'order',
     ];
+
+    public function jobs()
+    {
+        return $this->hasMany('App\Job');
+    }
 }

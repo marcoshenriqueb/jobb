@@ -14,4 +14,9 @@ class Types extends Model
     protected $fillable = [
         'name', 'var_name',
     ];
+
+    public function jobs()
+    {
+        return $this->hasMany('App\Job');
+    }
 }

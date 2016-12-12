@@ -13,17 +13,49 @@
         </div>
       </div>
     @endif
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="text-center m-t-lg">
-                <h1>
-                    Welcome in INSPINIA Laravel Starter Project
-                </h1>
-                <small>
-                    It is an application skeleton for a typical web app. You can use it to quickly bootstrap your webapp projects.
-                </small>
-            </div>
+    <br>
+    <div class="ibox">
+      <div class="ibox-content">
+        <div class="row m-b-sm m-t-sm">
+          <div class="col-md-12">
+            <form action="{{route('main')}}" method="get">
+              <div class="input-group">
+                <input type="text" name="search" class="input-sm form-control" value="{{old('search')}}" placeholder="Search Jobs!">
+                <span class="input-group-btn">
+                  <button type="submit" class="btn btn-sm btn-primary">Search</button>
+                </span>
+              </div>
+            </form>
+          </div>
         </div>
+        <div class="project-list">
+          <table class="table table-hover">
+            <tbody>
+              @foreach($jobs as $job)
+                <tr>
+                  <td class="project-status">
+                    <span class="label label-primary">{{$job->type->name}}</span>
+                  </td>
+                  <td class="project-title">
+                    <a href="#">{{$job->title}}</a><br>
+                    <small><strong>Created:</strong> {{$job->created_at}}</small>
+                  </td>
+                  <td class="project-completion">
+                    <small><strong>Location:</strong> {{$job->city->name}}</small><br>
+                    <small><strong>Category:</strong> {{$job->category->name}}</small>
+                  </td>
+                  <td class="project-completion">
+                    <small>{{$job->summary}}</small>
+                  </td>
+                  <td class="project-actions">
+                    <a href="#" class="btn btn-white btn-sm">View</a>
+                  </td>
+                </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 @endsection
