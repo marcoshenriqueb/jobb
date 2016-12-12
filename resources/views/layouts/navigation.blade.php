@@ -2,20 +2,11 @@
     <div class="sidebar-collapse">
         <ul class="nav metismenu" id="side-menu">
             <li class="nav-header">
-                <div class="dropdown profile-element">
-                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                        <span class="clear">
-                            <span class="block m-t-xs">
-                                <strong class="font-bold">Example user</strong>
-                            </span> <span class="text-muted text-xs block">Example menu <b class="caret"></b></span>
-                        </span>
-                    </a>
-                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                        <li><a href="#">Logout</a></li>
-                    </ul>
+                <div class="profile-element">
+                    <a href="{{route('main')}}"><strong class="font-bold">Braincities</strong></a>
                 </div>
                 <div class="logo-element">
-                    IN+
+                    BC+
                 </div>
             </li>
             <li class="{{ isActiveRoute('main') }}">

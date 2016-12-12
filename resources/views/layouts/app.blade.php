@@ -6,8 +6,8 @@
     <title>INSPINIA - @yield('title') </title>
 
 
-    <link rel="stylesheet" href="css/vendor.css" />
-    <link rel="stylesheet" href="css/app.css" />
+    <link rel="stylesheet" href="/css/vendor.css" />
+    <link rel="stylesheet" href="/css/app.css" />
 
 </head>
 <body>
@@ -36,7 +36,7 @@
     </div>
     <!-- End wrapper-->
 
-<script src="js/app.js" type="text/javascript"></script>
+<script src="/js/app.js" type="text/javascript"></script>
 
 @section('scripts')
 @show

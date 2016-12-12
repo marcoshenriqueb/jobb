@@ -10,8 +10,8 @@
         </div>
         <ul class="nav navbar-top-links navbar-right">
             <li>
-                <a href="#">
-                    <i class="fa fa-sign-out"></i> Log out
+                <a href="{{ route('job.create') }}">
+                    <i class="fa fa-newspaper-o"></i> Post Job
                 </a>
             </li>
         </ul>
