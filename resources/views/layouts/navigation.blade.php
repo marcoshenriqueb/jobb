@@ -10,10 +10,7 @@
                 </div>
             </li>
             <li class="{{ isActiveRoute('main') }}">
-                <a href="{{ url('/') }}"><i class="fa fa-th-large"></i> <span class="nav-label">Main view</span></a>
-            </li>
-            <li class="{{ isActiveRoute('minor') }}">
-                <a href="{{ url('/minor') }}"><i class="fa fa-th-large"></i> <span class="nav-label">Minor view</span> </a>
+                <a href="{{ route('main') }}"><i class="fa fa-th-large"></i> <span class="nav-label">Jobs Listing</span></a>
             </li>
         </ul>
 
