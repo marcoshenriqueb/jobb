@@ -25,4 +25,9 @@ class AdminController extends Controller
       }
       return redirect()->back()->withErrors(['Wrong email or password']);
     }
+
+    public function logout(){
+      Auth::logout();
+      return redirect()->intended('main');
+    }
 }

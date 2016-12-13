@@ -21,7 +21,7 @@
       <div class="ibox-content">
         <div class="row m-b-sm m-t-sm">
           <div class="col-md-4">
-            <a href="{{route('simple.create', ['mdl'=>$mdl])}}" class="btn btn-primary btn-block">New {{$mdl}}</a>
+            <a href="{{route('simple.create', ['mdl'=>$mdl])}}" class="btn btn-primary btn-sm btn-block">New {{$mdl}}</a>
           </div>
           <div class="col-md-8">
             <form action="{{route('simple',['mdl'=>$mdl])}}" method="get">
@@ -56,7 +56,7 @@
                     </td>
                   @endforeach
                   <td class="project-actions hidden-xs">
-                      <form action="#" method="post">
+                      <form action="{{route('simple.destroy', ['mdl'=>$mdl, 'id'=>$l->id])}}" method="post">
                         <input type="hidden" name="_method" value="DELETE">
                         {{ csrf_field() }}
                         <button type="submit" class="btn btn-danger btn-sm">Delete</button>

@@ -17,6 +17,10 @@ class SimpleRestController extends Controller
         "city"=>\App\City::class
       ];
 
+    public function __construct(){
+      $this->middleware('admin');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -110,8 +114,15 @@ class SimpleRestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $mdl, $id)
     {
-        //
+        try {
+          $m = $this->models[$mdl]::find($id);
+          $m->delete();
+          $request->session()->flash('posted', 'The '. $mdl .' was successfully deleted!');
+        } catch (Exception $e) {
+          $request->session()->flash('jobPost', "Couldn't delete this ". $mdl .".");
+        }
+        return redirect()->route('simple', ['mdl'=>$mdl]);
     }
 }
