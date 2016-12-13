@@ -15,6 +15,15 @@ class Types extends Model
         'name', 'var_name',
     ];
 
+    public static $columns = [
+       'name'=>'text', 'var_name'=>'text',
+    ];
+
+    public static $validator = [
+      "name"=>"string|max:255|required",
+      "var_name"=>"string|max:255|required"
+    ];
+
     public function jobs()
     {
         return $this->hasMany('App\Job');

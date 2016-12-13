@@ -40,9 +40,14 @@ class SimpleRestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($mdl)
     {
-        //
+        if (array_key_exists($mdl, $this->models)){
+          $fields = $this->models[$mdl]::$columns;
+          return view('simple.create', ['mdl'=>$mdl,'fields'=>$fields]);
+        }else {
+          return redirect()->route('main');
+        }
     }
 
     /**
@@ -51,9 +56,18 @@ class SimpleRestController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $mdl)
     {
-        //
+        if (property_exists($this->models[$mdl], 'validator')) {
+          $this->validate($request, $this->models[$mdl]::$validator);
+        }
+        $m = new $this->models[$mdl];
+        foreach ($this->models[$mdl]::$columns as $key => $value) {
+          $m->{$key} = $request->input($key);
+        }
+        $m->save();
+        $request->session()->flash('posted', 'The Job was posted successfully!');
+        return redirect()->route('simple', ['mdl'=>$mdl]);
     }
 
     /**

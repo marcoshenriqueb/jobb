@@ -15,6 +15,15 @@ class City extends Model
         'name', 'ascii_name',
     ];
 
+    public static $columns = [
+       'name'=>'text', 'ascii_name'=>'text',
+    ];
+
+    public static $validator = [
+      "name"=>"string|max:255|required",
+      "ascii_name"=>"string|max:255"
+    ];
+
     public function jobs()
     {
         return $this->hasMany('App\Job');

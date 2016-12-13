@@ -21,3 +21,4 @@ Route::post('/admin/login/', 'AdminController@postLogin')->name('admin.postLogin
 Route::get('/admin/', 'AdminController@index')->name('admin');
 Route::get('/{mdl}/', 'SimpleRestController@index')->name('simple');
 Route::get('/{mdl}/create/', 'SimpleRestController@create')->name('simple.create');
+Route::post('/{mdl}/', 'SimpleRestController@store')->name('simple.store');
