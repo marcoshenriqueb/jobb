@@ -6,18 +6,73 @@
   <div class="row wrapper border-bottom white-bg page-heading">
       <div class="col-lg-10">
           <h2>
-              {{$job->title}}
+              Job Detail
           </h2>
           <ol class="breadcrumb">
             <li><a href="{{route('main')}}">Home</a></li>
-            <li class="active"><strong>{{$job->title}}</strong></li>
+            <li class="active"><strong>Job Detail</strong></li>
           </ol>
       </div>
   </div>
-  <div class="wrapper wrapper-content animated fadeInRight">
-    <div class="row">
-      <div class="col-lg-12">
-        
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="wrapper wrapper-content animated fadeInUp">
+        <div class="ibox">
+          <div class="ibox-content">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="m-b-md">
+                  <h2>{{$job->title}}</h2>
+                </div>
+                <dl class="dl-horizontal">
+                  <dt>Type:</dt>
+                  <dd>
+                    <span class="label label-primary">{{$job->type->name}}</span>
+                  </dd>
+                </dl>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6">
+                <dl class="dl-horizontal">
+                  <dt>Company:</dt>
+                  <dd>{{$job->company}}</dd>
+                  <dt>Email:</dt>
+                  <dd>{{$job->email}}</dd>
+                  <dt>URL:</dt>
+                  <dd>{{$job->url?$job->url:'NA'}}</dd>
+                </dl>
+              </div>
+              <div class="col-lg-6">
+                <dl class="dl-horizontal">
+                  <dt>Category:</dt>
+                  <dd>{{$job->category->name}}</dd>
+                  <dt>City:</dt>
+                  <dd>{{$job->city->name}}</dd>
+                  <dt>Created at:</dt>
+                  <dd>{{$job->created_at}}</dd>
+                </dl>
+              </div>
+              <div class="col-lg-12">
+                <dl class="dl-horizontal">
+                  <dt>Summary:</dt>
+                  <dd>{{$job->summary}}</dd>
+                </dl>
+              </div>
+              <div class="col-lg-12">
+                <dl class="dl-horizontal">
+                  <dt>Description:</dt>
+                  <dd>{{$job->description}}</dd>
+                </dl>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12">
+                <a href="#" class="btn btn-primary btn-lg">Apply</a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
