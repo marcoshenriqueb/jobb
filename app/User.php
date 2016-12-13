@@ -18,6 +18,10 @@ class User extends Authenticatable
         'username', 'email', 'password', 'admin'
     ];
 
+    public static $columns = [
+       'username'=>'text', 'email'=>'email', 'password'=>'password', 'isAdmin'=>'checkbox'
+    ];
+
     /**
      * The attributes that should be hidden for arrays.
      *

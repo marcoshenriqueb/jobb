@@ -3,9 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Category;
-use App\Types;
-use Aṕp\City;
 use DB;
 use Illuminate\Support\Pluralizer;
 
@@ -14,7 +11,8 @@ class SimpleRestController extends Controller
     private $models = [
         "category"=>\App\Category::class,
         "type"=>\App\Types::class,
-        "city"=>\App\City::class
+        "city"=>\App\City::class,
+        "user"=>\App\User::class,
       ];
 
     public function __construct(){
@@ -31,7 +29,7 @@ class SimpleRestController extends Controller
         if (array_key_exists($mdl, $this->models)) {
           $search = $request->has('search') ? $request->input('search') : null;
           $columns = DB::getSchemaBuilder()->getColumnListing(Pluralizer::plural($mdl, 2));
-          $list = $this->models[$mdl]::where('name', 'LIKE', '%'. $search . '%')
+          $list = $this->models[$mdl]::where(key($this->models[$mdl]::$columns), 'LIKE', '%'. $search . '%')
                                     ->orderBy('created_at', 'desc')->get();
           return view('simple.index', ['list'=>$list, 'mdl'=>$mdl, 'columns'=>$columns, 'search'=>$search]);
         }else {

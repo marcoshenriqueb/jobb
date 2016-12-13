@@ -15,7 +15,7 @@
             @foreach($fields as $k => $f)
               <div class="form-group col-md-6" @if($errors->first($k)) has-error @endif">
                 <label class="control-label" style="text-transform:capitalize;" for="{{$k}}">{{$k}}</label>
-                <input value="{{ old($k) }}" type="{{$f}}" class="form-control" name="{{$k}}">
+                <input value="{{ old($k) }}" type="{{$f}}" @if($f != 'checkbox') class="form-control" @endif name="{{$k}}">
               </div>
             @endforeach
             <div class="col-lg-4 col-lg-offset-4">

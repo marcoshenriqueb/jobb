@@ -40,20 +40,28 @@
           <table class="table table-hover">
             <thead>
               <tr>
+                <?php $pos=0 ?>
                 @foreach($columns as $c)
-                  <th>
-                    {{$c}}
-                  </th>
+                  @if($pos<5)
+                    <th>
+                      {{$c}}
+                    </th>
+                  @endif
+                  <?php $pos++ ?>
                 @endforeach
               </tr>
             </thead>
             <tbody>
               @foreach($list as $l)
                 <tr>
+                  <?php $pos=0 ?>
                   @foreach($l->getAttributes() as $a)
-                    <td class="project-status">
-                      <span>{{$a}}</span>
-                    </td>
+                    @if($pos<5)
+                      <td class="project-status" style="max-width:250px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                        <span>{{$a}}</span>
+                      </td>
+                    @endif
+                    <?php $pos++ ?>
                   @endforeach
                   <td class="project-actions hidden-xs">
                       <form action="{{route('simple.destroy', ['mdl'=>$mdl, 'id'=>$l->id])}}" method="post">
