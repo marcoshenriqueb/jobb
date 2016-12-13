@@ -98,8 +98,15 @@ class JobController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        try {
+          $job = Job::find($id);
+          $job->delete();
+          $request->session()->flash('jobPost', 'The Job was successfully deleted!');
+        } catch (Exception $e) {
+          $request->session()->flash('jobPost', "Couldn't delete this job.");
+        }
+        return redirect()->route('main');
     }
 }

@@ -62,6 +62,14 @@
                   </td>
                   <td class="project-actions hidden-xs">
                     <a href="{{route('job.show', ['id'=>$job->id])}}" class="btn btn-white btn-sm">View</a>
+                    @if(Auth::check() && Auth::user()->isAdmin())
+                      <br><br>
+                      <form action="{{route('job.destroy', ['id'=>$job->id])}}" method="post">
+                        <input type="hidden" name="_method" value="DELETE">
+                        {{ csrf_field() }}
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                      </form>
+                    @endif
                   </td>
                 </tr>
               @endforeach

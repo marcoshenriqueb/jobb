@@ -12,6 +12,11 @@
             <li class="{{ isActiveRoute('main') }}">
                 <a href="{{ route('main') }}"><i class="fa fa-th-large"></i> <span class="nav-label">Jobs Listing</span></a>
             </li>
+            @if(Auth::check() && Auth::user()->isAdmin())
+              <li>
+                  <a href="#"> <span class="nav-label">ADMIN</span></a>
+              </li>
+            @endif
         </ul>
 
     </div>
