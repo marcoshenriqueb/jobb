@@ -29,4 +29,16 @@ class Job extends Model
     {
         return $this->belongsTo('App\City');
     }
+
+    public static function searchJobs($needle=null, $category=null){
+        $query = self::where(function ($query) use ($needle) {
+                        $query->where('title', 'LIKE', '%'. $needle . '%')
+                              ->orWhere('summary', 'LIKE', '%'. $needle . '%')
+                              ->orWhere('description', 'LIKE', '%'. $needle . '%');
+                    });
+        if ($category) {
+          $query = $query->where('category_id', '=', $category);
+        }
+        return $query->orderBy('created_at', 'desc')->get();
+    }
 }

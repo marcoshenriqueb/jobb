@@ -3,19 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Job as Job;
+use App\Job;
+use App\Category;
 
 class MainController extends Controller
 {
     public function index(Request $request){
-      if ($request->has('search')) {
-        $needle = $request->input('search');
-        $jobs = Job::where('title', 'LIKE', '%'. $needle . '%')
-                    ->orWhere('summary', 'LIKE', '%'. $needle . '%')
-                    ->orWhere('description', 'LIKE', '%'. $needle . '%')->get();
-      }else {
-        $jobs = Job::orderBy('created_at', 'desc')->get();
-      }
-      return view('home.index', ['jobs'=>$jobs]);
+      $needle = $request->has('search') ? $request->input('search') : null;
+      $category = $request->has('category') && $request->input('category') != "All" ? $request->input('category') : null;
+      $jobs = Job::searchJobs($needle, $category);
+      $categories = Category::all();
+      return view('home.index', [
+                              'jobs'=>$jobs,
+                              'search'=>$needle,
+                              'categories'=>$categories,
+                              'cat'=>$category
+                            ]);
     }
 }

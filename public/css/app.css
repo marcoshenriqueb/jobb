@@ -17264,6 +17264,10 @@ body.md-skin {
   }
 }
 
+.project-completion {
+  max-width: 250px;
+}
+
 @media print {
   nav.navbar-static-side {
     display: none;

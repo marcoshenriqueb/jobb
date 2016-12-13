@@ -22,11 +22,21 @@
         <div class="row m-b-sm m-t-sm">
           <div class="col-md-12">
             <form action="{{route('main')}}" method="get">
-              <div class="input-group">
-                <input type="text" name="search" class="input-sm form-control" value="{{old('search')}}" placeholder="Search Jobs!">
-                <span class="input-group-btn">
-                  <button type="submit" class="btn btn-sm btn-primary">Search</button>
-                </span>
+              <div class="col-md-4">
+                <select class="input-sm form-control" name="category">
+                  <option>All</option>
+                  @foreach($categories as $category)
+                    <option @if($category->id == $cat) selected @endif value="{{$category->id}}">{{$category->name}}</option>
+                  @endforeach
+                </select>
+              </div>
+              <div class="col-md-8">
+                <div class="input-group">
+                  <input type="text" name="search" class="input-sm form-control" value="{{$search}}" placeholder="Search Jobs!">
+                  <span class="input-group-btn">
+                    <button type="submit" class="btn btn-sm btn-primary">Search</button>
+                  </span>
+                </div>
               </div>
             </form>
           </div>
@@ -40,18 +50,18 @@
                     <span class="label label-primary">{{$job->type->name}}</span>
                   </td>
                   <td class="project-title">
-                    <a href="#">{{$job->title}}</a><br>
+                    <a href="{{route('job.show', ['id'=>$job->id])}}">{{$job->title}}</a><br>
                     <small><strong>Created:</strong> {{$job->created_at}}</small>
                   </td>
                   <td class="project-completion">
                     <small><strong>Location:</strong> {{$job->city->name}}</small><br>
                     <small><strong>Category:</strong> {{$job->category->name}}</small>
                   </td>
-                  <td class="project-completion">
+                  <td class="project-completion hidden-xs hidden-sm">
                     <small>{{$job->summary}}</small>
                   </td>
-                  <td class="project-actions">
-                    <a href="#" class="btn btn-white btn-sm">View</a>
+                  <td class="project-actions hidden-xs">
+                    <a href="{{route('job.show', ['id'=>$job->id])}}" class="btn btn-white btn-sm">View</a>
                   </td>
                 </tr>
               @endforeach
