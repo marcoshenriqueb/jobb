@@ -12,8 +12,8 @@
           </div>
         </div>
       </div>
+      <br>
     @endif
-    <br>
     <div class="ibox">
       <div class="ibox-title">
         <h5>Most recent jobs</h5>

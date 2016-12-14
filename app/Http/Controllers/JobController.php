@@ -6,19 +6,17 @@ use App\Types as Type;
 use App\Category as Category;
 use App\City as City;
 use App\Job as Job;
+use App\Application;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreJobPost as StoreJobPost;
+use App\Http\Requests\StoreJobApplication;
 
 class JobController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+    public function __construct()
     {
-        //
+        $this->middleware('admin')->only('destroy');
     }
 
     /**
@@ -70,14 +68,35 @@ class JobController extends Controller
     }
 
     /**
+     * Apply for a job.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function apply($id)
+    {
+        return view('job.apply', ['job_id'=>$id]);
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function storeApply(StoreJobApplication $request, $id)
     {
-        //
+        $file = $request->file('cv');
+        $file->move(public_path() . '/cv', $file->getClientOriginalName());
+        $ap = new Application;
+        $ap->ip = $request->ip();
+        $ap->job_id = $request->input('job_id');
+        $ap->name = $request->input('name');
+        $ap->email = $request->input('email');
+        $ap->message = $request->input('message');
+        $ap->cv = $file->getClientOriginalName();
+        $ap->save();
+        $request->session()->flash('posted', 'The application was sent!');
+        return redirect()->route('job.show', ['id'=>$request->input('job_id')]);
     }
 
     /**

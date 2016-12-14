@@ -17,6 +17,15 @@
   <div class="row">
     <div class="col-lg-12">
       <div class="wrapper wrapper-content animated fadeInUp">
+        @if(Session::has('posted'))
+          <div class="row">
+            <div class="col-lg-offset-1 col-lg-10">
+              <div class="alert alert-success">
+                {{Session::get('posted')}}
+              </div>
+            </div>
+          </div>
+        @endif
         <div class="ibox">
           <div class="ibox-content">
             <div class="row">
@@ -68,12 +77,14 @@
             </div>
             <div class="row">
               <div class="col-lg-12">
-                <a href="#" class="btn btn-primary btn-lg">Apply</a>
-                <form class="pull-right" action="{{route('job.destroy', ['id'=>$job->id])}}" method="post">
-                  <input type="hidden" name="_method" value="DELETE">
-                  {{ csrf_field() }}
-                  <button type="submit" class="btn btn-danger btn-lg">Delete</button>
-                </form>
+                <a href="{{route('job.apply', ['id'=>$job->id])}}" class="btn btn-primary btn-lg">Apply</a>
+                @if(Auth::check() && Auth::user()->isAdmin())
+                  <form class="pull-right" action="{{route('job.destroy', ['id'=>$job->id])}}" method="post">
+                    <input type="hidden" name="_method" value="DELETE">
+                    {{ csrf_field() }}
+                    <button type="submit" class="btn btn-danger btn-lg">Delete</button>
+                  </form>
+                @endif
               </div>
             </div>
           </div>
