@@ -19,7 +19,14 @@ class User extends Authenticatable
     ];
 
     public static $columns = [
-       'username'=>'text', 'email'=>'email', 'password'=>'password', 'isAdmin'=>'checkbox'
+       'username'=>'text', 'email'=>'email', 'password'=>'password', 'admin'=>'checkbox'
+    ];
+
+    public static $validator = [
+      "username"=>"required|string|max:255",
+      "password"=>"required|string|max:255",
+      "email"=>"required|email|max:255",
+      "admin"=>"boolean"
     ];
 
     /**

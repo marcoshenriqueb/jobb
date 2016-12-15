@@ -22,6 +22,13 @@
                   <label class="control-label" for="password">Password</label>
                   <input type="password" class="form-control" name="password">
                 </div>
+                @if($first)
+                <div class="col-lg-12">
+                  <p>
+                    You are the first user, use the email 'admin@admin.com' and the password 'admin' to login. Then, delete this user and create a new one for safety. 
+                  </p>
+                </div>
+                @endif
                 <div class="col-lg-12">
                   <button type="submit" class="btn btn-block btn-primary">Login</button>
                   @if (count($errors) > 0)

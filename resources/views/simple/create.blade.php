@@ -13,10 +13,19 @@
           {{ csrf_field() }}
           <div class="row">
             @foreach($fields as $k => $f)
-              <div class="form-group col-md-6" @if($errors->first($k)) has-error @endif">
-                <label class="control-label" style="text-transform:capitalize;" for="{{$k}}">{{$k}}</label>
-                <input value="{{ old($k) }}" type="{{$f}}" @if($f != 'checkbox') class="form-control" @endif name="{{$k}}">
-              </div>
+              @if($f == 'checkbox')
+                <div class="col-md-6">
+                  <label class="checkbox-inline" style="text-transform:capitalize;margin-top:25px;" for="{{$k}}">
+                    <input type="checkbox" name="{{$k}}" value="1">
+                    {{$k}}
+                  </label>
+                </div>
+              @else
+                <div class="form-group col-md-6" @if($errors->first($k)) has-error @endif">
+                  <label class="control-label" style="text-transform:capitalize;" for="{{$k}}">{{$k}}</label>
+                  <input value="{{ old($k) }}" type="{{$f}}"  class="form-control" name="{{$k}}">
+                </div>
+              @endif
             @endforeach
             <div class="col-lg-4 col-lg-offset-4">
               <button type="submit" class="btn btn-block btn-primary">Save</button>

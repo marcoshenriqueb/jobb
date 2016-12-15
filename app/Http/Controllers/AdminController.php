@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\User;
 
 class AdminController extends Controller
 {
@@ -16,7 +17,18 @@ class AdminController extends Controller
     }
 
     public function login(){
-      return view('admin.login');
+      $users = User::where('admin', '=', true)->get();
+      $first = false;
+      if (count($users) == 0) {
+        $first = true;
+        $u = new User;
+        $u->username = 'admin';
+        $u->email = 'admin@admin.com';
+        $u->password = 'admin';
+        $u->admin = true;
+        $u->save();
+      }
+      return view('admin.login', ['first'=>$first]);
     }
 
     public function postLogin(Request $request){
