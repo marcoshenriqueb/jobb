@@ -30,6 +30,11 @@ class Job extends Model
         return $this->belongsTo('App\City');
     }
 
+    public function applicants()
+    {
+        return $this->hasMany('App\Application');
+    }
+
     public static function searchJobs($needle=null, $category=null){
         $query = self::where(function ($query) use ($needle) {
                         $query->where('title', 'LIKE', '%'. $needle . '%')

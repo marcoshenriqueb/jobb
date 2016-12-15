@@ -14,4 +14,9 @@ class Application extends Model
     protected $fillable = [
         'name', 'email', 'ip', 'message', 'cv', 'job_id',
     ];
+
+    public function job()
+    {
+        return $this->belongsTo('App\Job');
+    }
 }

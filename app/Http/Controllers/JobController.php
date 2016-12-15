@@ -106,9 +106,14 @@ class JobController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function applicants($hash_url)
     {
-        //
+        $job = Job::where('hash_url', '=', $hash_url)->with('applicants')->first();
+        if ($job != null) {
+          return view('job.applicants', ['job'=>$job]);
+        }else {
+          return redirect()->route('main');
+        }
     }
 
     /**
