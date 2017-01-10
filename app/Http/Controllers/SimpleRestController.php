@@ -29,7 +29,8 @@ class SimpleRestController extends Controller
         if (array_key_exists($mdl, $this->models)) {
           $search = $request->has('search') ? $request->input('search') : null;
           $columns = DB::getSchemaBuilder()->getColumnListing(Pluralizer::plural($mdl, 2));
-          $list = $this->models[$mdl]::where(key($this->models[$mdl]::$columns), 'LIKE', '%'. $search . '%')
+          $class = $this->models[$mdl];
+          $list = $class::where(key($class::$columns), 'LIKE', '%'. $search . '%')
                                     ->orderBy('created_at', 'desc')->get();
           return view('simple.index', ['list'=>$list, 'mdl'=>$mdl, 'columns'=>$columns, 'search'=>$search]);
         }else {
@@ -45,7 +46,8 @@ class SimpleRestController extends Controller
     public function create($mdl)
     {
         if (array_key_exists($mdl, $this->models)){
-          $fields = $this->models[$mdl]::$columns;
+          $class = $this->models[$mdl];
+          $fields = $class::$columns;
           return view('simple.create', ['mdl'=>$mdl,'fields'=>$fields]);
         }else {
           return redirect()->route('main');
@@ -60,11 +62,12 @@ class SimpleRestController extends Controller
      */
     public function store(Request $request, $mdl)
     {
-        if (property_exists($this->models[$mdl], 'validator')) {
-          $this->validate($request, $this->models[$mdl]::$validator);
+        $class = $this->models[$mdl];
+        if (property_exists($class, 'validator')) {
+          $this->validate($request, $class::$validator);
         }
-        $m = new $this->models[$mdl];
-        foreach ($this->models[$mdl]::$columns as $key => $value) {
+        $m = new $class;
+        foreach ($class::$columns as $key => $value) {
           $m->{$key} = $request->input($key);
         }
         $m->save();
@@ -115,7 +118,8 @@ class SimpleRestController extends Controller
     public function destroy(Request $request, $mdl, $id)
     {
         try {
-          $m = $this->models[$mdl]::find($id);
+          $class = $this->models[$mdl];
+          $m = $class::find($id);
           $m->delete();
           $request->session()->flash('posted', 'The '. $mdl .' was successfully deleted!');
         } catch (Exception $e) {
